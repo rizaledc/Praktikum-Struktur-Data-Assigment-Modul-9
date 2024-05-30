@@ -7,7 +7,9 @@
 ## Tujuan Praktikum
 
  a. Mampumemahami konsep rekursif pada struktur data dan algoritma
+ 
  b. Mampumengimplementasikan rekursif pada kode program
+ 
  c. Mahasiswa mampu menerapkan Hash Code kedalam pemrograman
  
 ## Dasar Teori
