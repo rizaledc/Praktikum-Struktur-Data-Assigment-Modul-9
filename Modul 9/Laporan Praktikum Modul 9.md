@@ -14,9 +14,9 @@
 
 ### A. Algoritma Rekursif
 
-Algoritma rekursif merupakan metode yang baik serta efektif diekspresikan sebagai rangkaian terbatas untuk melakukan suatu perintah. Algoritma Rekursif terdiri dari dua kata yaitu algoritma dan rekursif. Dimana algoritma menurut Gun Gun Maulana merupakan metode efektif yang diekspresikan sebagai rangkaian terbatas. Algoritma juga merupakan kumpulan perintah untuk menyelesaikan masalah. Menurut Wilis Kaswidjanti, S.SI., M.Kom Rekursif merupakan alat untuk memecahkan masalah dalam suatu fungsi atau procedure yang memanggil dirinya sendiri. Logika rekursif memiliki sebuah parameter yang dapat berguna untuk memaggil dirinya sendiri. Logika ini digunakan untuk menggantikan proses iterasi (perulangan). Definisi menurut Niclaus Wirth : “ An object is said be recursive if it partially consist or is defines in terms of it self”
+Algoritma rekursif merupakan metode yang baik serta efektif diekspresikan sebagai rangkaian terbatas untuk melakukan suatu perintah. Algoritma Rekursif terdiri dari dua kata yaitu algoritma dan rekursif [1]. Dimana algoritma menurut Gun Gun Maulana merupakan metode efektif yang diekspresikan sebagai rangkaian terbatas. Algoritma juga merupakan kumpulan perintah untuk menyelesaikan masalah. Menurut Wilis Kaswidjanti, S.SI., M.Kom Rekursif merupakan alat untuk memecahkan masalah dalam suatu fungsi atau procedure yang memanggil dirinya sendiri. Logika rekursif memiliki sebuah parameter yang dapat berguna untuk memaggil dirinya sendiri[2]. Logika ini digunakan untuk menggantikan proses iterasi (perulangan). Definisi menurut Niclaus Wirth : “ An object is said be recursive if it partially consist or is defines in terms of it self”
 
-Perulangan dapat diubah menjadi kode rekursif agar lebih singkat dalam proses kompilasi dan interpretasi. Rekursi dapat diterapkan dalam masalah pengurutan, pencarian, serta penjelajahan yang sering kali diselesaikan dengan kode rekursif sederhana. 
+Perulangan dapat diubah menjadi kode rekursif agar lebih singkat dalam proses kompilasi dan interpretasi. Rekursi dapat diterapkan dalam masalah pengurutan, pencarian, serta penjelajahan yang sering kali diselesaikan dengan kode rekursif sederhana [3]. 
 
 <p align="center">
   <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-9/blob/main/Modul%209/output/Gambaran%20Rekursif%20Berjalan.png" alt="Alt Text">
@@ -108,7 +108,7 @@ Collision merupakan keterbatasan hash table ketika dua angka dimasukkan ke dalam
 
 1. Open Hashing (Chaining)
 
-Metode open hashing, juga dikenal sebagai separate chaining, adalah salah satu teknik penanganan tabrakan dalam hash table di mana setiap slot dalam array menyimpan daftar terhubung (linked list) dari semua elemen yang memiliki nilai hash yang sama. Ketika terjadi tabrakan, elemen baru ditambahkan ke akhir daftar terhubung di slot yang sesuai. Proses penyisipan, pencarian, dan penghapusan elemen dalam metode ini melibatkan penanganan daftar terhubung tersebut. Penyisipan dilakukan dengan menambahkan elemen baru ke dalam daftar, pencarian dilakukan dengan menelusuri daftar untuk menemukan elemen dengan kunci yang diinginkan, dan penghapusan dilakukan dengan menghapus elemen dari daftar. Metode open hashing mengelola tabrakan dengan cara yang efisien, karena daftar terhubung memungkinkan penambahan elemen baru tanpa memerlukan pencarian slot kosong berikutnya dalam array. Selain itu, metode ini juga menghindari masalah clustering yang sering terjadi pada metode open addressing, sehingga performa hash table dapat tetap stabil meskipun beban (load factor) tinggi. Namun, performa metode ini juga bergantung pada panjang rata-rata dari daftar terhubung; semakin panjang daftar, semakin tinggi kompleksitas operasinya.
+Metode open hashing, juga dikenal sebagai separate chaining, adalah salah satu teknik penanganan tabrakan dalam hash table di mana setiap slot dalam array menyimpan daftar terhubung (linked list) dari semua elemen yang memiliki nilai hash yang sama. Ketika terjadi tabrakan, elemen baru ditambahkan ke akhir daftar terhubung di slot yang sesuai. Proses penyisipan, pencarian, dan penghapusan elemen dalam metode ini melibatkan penanganan daftar terhubung tersebut [4]. Penyisipan dilakukan dengan menambahkan elemen baru ke dalam daftar, pencarian dilakukan dengan menelusuri daftar untuk menemukan elemen dengan kunci yang diinginkan, dan penghapusan dilakukan dengan menghapus elemen dari daftar. Metode open hashing mengelola tabrakan dengan cara yang efisien, karena daftar terhubung memungkinkan penambahan elemen baru tanpa memerlukan pencarian slot kosong berikutnya dalam array. Selain itu, metode ini juga menghindari masalah clustering yang sering terjadi pada metode open addressing, sehingga performa hash table dapat tetap stabil meskipun beban (load factor) tinggi. Namun, performa metode ini juga bergantung pada panjang rata-rata dari daftar terhubung; semakin panjang daftar, semakin tinggi kompleksitas operasinya.
 
 2. Closed Hashing
 
@@ -1183,3 +1183,10 @@ Algoritma rekursif dan hash table adalah dua konsep penting dalam ilmu komputer 
 
 ## Referensi
 
+[1]	S. Setiawan, R. Manurung, and A. Azurat, “Struktur Data dan Algoritma Dasar-dasar Rekursif Devide and Conquer Mengulang : Maximum Contiguous subsequence,” 2010.
+
+[2]	R. Munir, “Rekursi dan Relasi Rekurens Rekursi,” Rekursi dan Relasi Rekurens, pp. 1–27, 2020.
+
+[3]	I. P. S. I Gede Wira Kusuma Jaya, Ida Bagus Nyoman Wijana Manuaba, Kadek Ryan Wijaya and I. G. A. G. Pratama Wardhana, I Made Andika Saputra, “Jurnal Ilmu Komputer Indonesia ( JIK ) Vol : 5 , No . 2, November 2020 Jurnal Ilmu Komputer Indonesia ( JIK ) Vol : 5 , No . 2 , November 2020 ISSN ( Print ): 2615-2703 , ISSN ( Online ): 2615-2711,” no. 2, pp. 1–13, 2020.
+
+[4]	G. M. Sridevi, M. V. Ramakrishna, and D. V. Ashoka, “Comprehensive Performance Study of Hashing Functions,” Comput. Sci. J. Mold., vol. 31, no. 2, pp. 183–199, 2023, doi: 10.56415/csjm.v31.10.
