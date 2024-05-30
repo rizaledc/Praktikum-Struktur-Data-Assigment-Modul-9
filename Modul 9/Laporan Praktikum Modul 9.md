@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul Stack dan Queue</h1>
+# <h1 align="center">Laporan Praktikum Modul Rekursif dan Hash Table</h1>
 
 <p align="center">Rizal Wahyu Pratama</p>
 <p align="center">2311110029</p>
@@ -575,151 +575,38 @@ Fungsi main atau fungsi utama ini merupakan fungsi yang pertama kali akan diekse
 
 Output dari program diatas pertamanya memasukkan nomor Mistah, Pastah, dan Ghana. Berikutnya nomor di cetak --> Menghapus nomor Mistah --> Mencetak nomor Mistah setelah di hapus --> Mencetak seluruh isi Hash Table.
 
-## Unguided 
+## Unguided
 
 ### 1. Unguided 1
 
-#### Modifikasi guided diatas yang mana heap dikonstruksi secara manual berdasarkan user
+####  Buatlah sebuah program Rekursif Langsung (Direct Recursion) yang menghitung nilai faktorial dari sebuah inputan bilangan bulat positif.
 
 **Kode Program:**
 
 ```C++
 #include <iostream>
-#include <algorithm>
-#include <vector>
 
-// Mendeklarasikan vector untuk menyimpan elemen heap
-std::vector<int> H;
-// Mendeklarasikan variabel untuk menyimpan ukuran heap saat ini
-int heapSize = -1;
-
-// Fungsi untuk mendapatkan indeks parent dari node saat ini
-int parent(int i) {
-    return (i - 1) / 2;
+// Fungsi untuk menghitung faktorial menggunakan rekursi langsung
+long long faktorial(int n) {
+    if 
+        (n == 0 || n== 1) 
+        return 1;
+    else // basis rekursi
+        return n * faktorial(n - 1); // rekursi
 }
 
-// Fungsi untuk mendapatkan indeks anak kiri dari node saat ini
-int leftChild(int i) {
-    return (2 * i) + 1;
-}
-
-// Fungsi untuk mendapatkan indeks anak kanan dari node saat ini
-int rightChild(int i) {
-    return (2 * i) + 2;
-}
-
-// Fungsi untuk memperbaiki posisi node ke atas heap jika diperlukan
-void shiftUp(int i) {
-    while (i > 0 && H[parent(i)] < H[i]) {
-        std::swap(H[parent(i)], H[i]);
-        i = parent(i);
-    }
-}
-
-// Fungsi untuk memperbaiki posisi node ke bawah heap jika diperlukan
-void shiftDown(int i) {
-    int maxIndex = i;
-    int l = leftChild(i);
-    if (l <= heapSize && H[l] > H[maxIndex]) {
-        maxIndex = l;
-    }
-
-    int r = rightChild(i);
-    if (r <= heapSize && H[r] > H[maxIndex]) {
-        maxIndex = r;
-    }
-    if (i != maxIndex) {
-        std::swap(H[i], H[maxIndex]);
-        shiftDown(maxIndex);
-    }
-}
-
-// Fungsi untuk memasukkan elemen baru ke dalam heap
-void insert(int p) {
-    if (static_cast<size_t>(heapSize + 1) >= H.size()) {
-        H.push_back(p); // Memastikan ada ruang di vector sebelum menambahkan elemen
-    } else {
-        H[heapSize + 1] = p;
-    }
-    heapSize++;
-    shiftUp(heapSize);
-}
-
-// Fungsi untuk mengambil elemen maksimum dari heap dan memperbaiki struktur heap
-int extractMax() {
-    int result = H[0];
-    H[0] = H[heapSize];
-    heapSize--;
-    shiftDown(0);
-    return result;
-}
-
-// Fungsi untuk mengubah prioritas elemen di heap dan memperbaiki struktur heap
-void changePriority(int i, int p) {
-    int oldp = H[i];
-    H[i] = p;
-    if (p > oldp) {
-        shiftUp(i);
-    } else {
-        shiftDown(i);
-    }
-}
-
-// Fungsi untuk mendapatkan elemen maksimum dari heap tanpa menghapusnya
-int getMax() {
-    return H[0];
-}
-
-// Fungsi untuk menghapus elemen dari heap
-void remove(int i) {
-    H[i] = getMax() + 1;
-    shiftUp(i);
-    extractMax();
-}
-
-// Fungsi utama untuk menjalankan operasi heap
 int main() {
-    int numElements, element;
-    std::cout << "Masukkan jumlah elemen: ";
-    std::cin >> numElements;
-    std::cout << "Masukkan elemen-elemen heap: ";
-    for (int i = 0; i < numElements; ++i) {
-        std::cin >> element;
-        insert(element);
-    }
+    int angka;
+    std::cout << "Masukkan bilangan bulat positif: ";
+    std::cin >> angka;
 
-    std::cout << "Priority Queue: ";
-    for (int i = 0; i <= heapSize; ++i) {
-        std::cout << H[i] << " ";
+    // Memastikan bahwa angka adalah positif
+    if (angka < 0) {
+        std::cout << "Faktorial tidak didefinisikan untuk bilangan negatif." << std::endl;
+    } else {
+        long long hasil = faktorial(angka);
+        std::cout << "Hasil Faktorial dari " << angka << " adalah: " << hasil << std::endl;
     }
-    std::cout << "\n";
-
-    std::cout << "Node with maximum priority: " << extractMax() << "\n";
-    std::cout << "Priority queue after extracting maximum: ";
-    for (int i = 0; i <= heapSize; ++i) {
-        std::cout << H[i] << " ";
-    }
-    std::cout << "\n";
-
-    int indexToChange, newPriority;
-    std::cout << "Enter index to change priority and new priority: ";
-    std::cin >> indexToChange >> newPriority;
-    changePriority(indexToChange, newPriority);
-    std::cout << "Priority queue after priority change: ";
-    for (int i = 0; i <= heapSize; ++i) {
-        std::cout << H[i] << " ";
-    }
-    std::cout << "\n";
-
-    int indexToRemove;
-    std::cout << "Enter index to remove: ";
-    std::cin >> indexToRemove;
-    remove(indexToRemove);
-    std::cout << "Priority queue after removing the element: ";
-    for (int i = 0; i <= heapSize; ++i) {
-        std::cout << H[i] << " ";
-    }
-    std::cout << "\n";
 
     return 0;
 }
@@ -731,214 +618,568 @@ int main() {
 
 ```C++
 #include <iostream>
-#include <algorithm>
-#include <vector>
-
-// Mendeklarasikan vector untuk menyimpan elemen heap
-std::vector<int> H;
-// Mendeklarasikan variabel untuk menyimpan ukuran heap saat ini
-int heapSize = -1;
 ```
 
-Library iostream digunakan untuk menjalankan operasi input dan output pada program. Library algorithm digunakan untuk menggunakan algoritma std::swap. Library vector digunakan untuk menyimpan heap nantinya.
-
-std::vector<int> H digunakan mendeklarasikan vector H untuk menyimpan elemen heap. int heapSize = -1 menginisialisasi ukuran heap dengan -1 menunjukkan bahwa heap awalnya kosong.
+Library iostream digunakan untuk menjalankan operasi input dan output pada program. Memungkinkan penggunaan fungsi std::cout dan std::cin.
 
 #### Bagian 2
 
 ```C++
-int parent(int i) {
-    return (i - 1) / 2;
-}
-
-int leftChild(int i) {
-    return (2 * i) + 1;
-}
-
-int rightChild(int i) {
-    return (2 * i) + 2;
-}
+   long long faktorial(int n) {
+       if (n == 0 || n == 1) 
+           return 1;
+       else
+           return n * faktorial(n - 1);
+   }
 ```
 
-3 kode di atas digunakan untuk mengembalikan indeks parent, mengembalikan indeks kiri, dan mengembalikan indeks kanan dengan indeks i.
-
+- Fungsi faktorial menerima satu parameter n (bilangan bulat).
+- Fungsi ini menggunakan rekursi untuk menghitung faktorial.
+- Basis rekursinya adalah jika n sama dengan 0 atau 1, maka faktorialnya adalah 1.
+- Jika tidak, fungsi akan memanggil dirinya sendiri dengan argumen n - 1 dan mengalikan hasilnya dengan n.
+  
 #### Bagian 3
 
 ```C++
-void shiftUp(int i) {
-    while (i > 0 && H[parent(i)] < H[i]) {
-        std::swap(H[parent(i)], H[i]);
-        i = parent(i);
-    }
-}
+   int main() {
+       int angka;
+       std::cout << "Masukkan bilangan bulat positif: ";
+       std::cin >> angka;
 
+       if (angka < 0) {
+           std::cout << "Faktorial tidak didefinisikan untuk bilangan negatif." << std::endl;
+       } else {
+           long long hasil = faktorial(angka);
+           std::cout << "Hasil Faktorial dari " << angka << " adalah: " << hasil << std::endl;
+       }
+
+       return 0;
+   }
 ```
 
-Kode di atas merupakan fungsi shiftUp dimana selama node i lebih besar dari parentnya, maka node tersebut akan ditukar dan memperbaharui i sebagai parentnya.
+Fungsi di atas merupakan fungsi main yang berupa fungsi utama di dalam program yang disebut dengan fungsi main. Fungsi main yang pertama di eksekusi dan memengaruhi tampilan output.
 
-#### Bagian 4
+- Pengguna diminta untuk memasukkan bilangan bulat positif.
+- Jika bilangan yang dimasukkan negatif, program akan memberikan pesan bahwa faktorial tidak didefinisikan untuk bilangan negatif.
+- Jika bilangan positif, fungsi faktorial dipanggil dengan bilangan tersebut sebagai argumen, dan hasilnya ditampilkan.
+- Fungsi main mengembalikan 0, menandakan bahwa program berakhir tanpa error.
 
-```C++
-void shiftDown(int i) {
-    int maxIndex = i;
-    int l = leftChild(i);
-    if (l <= heapSize && H[l] > H[maxIndex]) {
-        maxIndex = l;
-    }
-
-    int r = rightChild(i);
-    if (r <= heapSize && H[r] > H[maxIndex]) {
-        maxIndex = r;
-    }
-    if (i != maxIndex) {
-        std::swap(H[i], H[maxIndex]);
-        shiftDown(maxIndex);
-    }
-}
-```
-
-Kode di atas merupakan kode untuk fungsi shiftDown. Dimana ketika child kiri maupun kanan lebih besar dari pada node yang ada maka tukar node child yang lebih besar dan perbaharui indeks ke-i.
-
-#### Bagian 5
-
-```C++
-void insert(int p) {
-    if (static_cast<size_t>(heapSize + 1) >= H.size()) {
-        H.push_back(p); // Memastikan ada ruang di vector sebelum menambahkan elemen
-    } else {
-        H[heapSize + 1] = p;
-    }
-    heapSize++;
-    shiftUp(heapSize);
-}
-```
-
-Kode di atas merupakan kode untuk membuat fungsi insert dimana telah ditambahkan elemen baru yaitu p ke dalam heap. Lalu vektor ukurannya di cek apakah sudah cukup atau belum. Jika belum cukup maka akan ditambahkan elemen push_back. Menambah heapSize dan menempatkan elemen baru pada posisi akhir, lalu memanggil shiftUp untuk memastikan heap tetap valid.
-
-#### Bagian 6
-
-```C++
-int extractMax() {
-    int result = H[0];
-    H[0] = H[heapSize];
-    heapSize--;
-    shiftDown(0);
-    return result;
-}
-```
-
-Pada kode di atas akan menjalankan tugas dengan mengambil elemen maksimum dari heap. Menukar elemen maksimum dengan elemen terakhir dan mengurangi ukuran heap. Lalu memanggil shiftDown untuk memastikan heap tetap valid.
-
-#### Bagian 7
-
-```C++
-void changePriority(int i, int p) {
-    int oldp = H[i];
-    H[i] = p;
-    if (p > oldp) {
-        shiftUp(i);
-    } else {
-        shiftDown(i);
-    }
-}
-```
-
-Pada kode di atas, elemen indeks i menjadi p. Dimana ketika prioritas baru lebih besar maka akan dipanggil shiftUp. Jika lebih kecil, maka memanggil shiftDown.
-
-#### Bagian 8
-
-```C++
-int getMax() {
-    return H[0];
-}
-void remove(int i) {
-    H[i] = getMax() + 1;
-    shiftUp(i);
-    extractMax();
-}
-```
-
-getMax() digunakan untuk mengembalikan elemen maksimum. remove(int i) digunakan untuk menghapus elemen indeks ke-i. Mengatur elemen tersebut ke nilai lebih besar dari elemen maksimum, memanggil shiftUp untuk menempatkannya di root, kemudian memanggil extractMax untuk menghapusnya.
-
-#### Bagian 8
-
-```C++
-int main() {
-    int numElements, element;
-    std::cout << "Masukkan jumlah elemen: ";
-    std::cin >> numElements;
-    std::cout << "Masukkan elemen-elemen heap: ";
-    for (int i = 0; i < numElements; ++i) {
-        std::cin >> element;
-        insert(element);
-    }
-
-    std::cout << "Priority Queue: ";
-    for (int i = 0; i <= heapSize; ++i) {
-        std::cout << H[i] << " ";
-    }
-    std::cout << "\n";
-
-    std::cout << "Node with maximum priority: " << extractMax() << "\n";
-    std::cout << "Priority queue after extracting maximum: ";
-    for (int i = 0; i <= heapSize; ++i) {
-        std::cout << H[i] << " ";
-    }
-    std::cout << "\n";
-
-    int indexToChange, newPriority;
-    std::cout << "Enter index to change priority and new priority: ";
-    std::cin >> indexToChange >> newPriority;
-    changePriority(indexToChange, newPriority);
-    std::cout << "Priority queue after priority change: ";
-    for (int i = 0; i <= heapSize; ++i) {
-        std::cout << H[i] << " ";
-    }
-    std::cout << "\n";
-
-    int indexToRemove;
-    std::cout << "Enter index to remove: ";
-    std::cin >> indexToRemove;
-    remove(indexToRemove);
-    std::cout << "Priority queue after removing the element: ";
-    for (int i = 0; i <= heapSize; ++i) {
-        std::cout << H[i] << " ";
-    }
-    std::cout << "\n";
-
-    return 0;
-}
-```
-Fungsi di atas merupakan fungsi main yang berupa fungsi utama di dalam program yang disebut dengan fungsi main. Pengguna akan diminta untuk memasukkan jumlah elemen yang akan dimasukkan ke dalam heap. Berikutnya terdapat beberapa operasi yang berjalan di heap sebagai berikut:
-
-- insert: Menambahkan elemen-elemen ke heap. --> Mencetak antrian prioritas saat ini.
-- extractMax: Mengambil dan mencetak elemen maksimum dari heap. --> Mencetak antrian prioritas setelah mengeluarkan elemen maksimum.
-- changePriority: Mengubah prioritas elemen di indeks tertentu. --> Mencetak antrian prioritas setelah mengubah prioritas elemen.
-- remove: Menghapus elemen di indeks tertentu. --> Mencetak antrian prioritas setelah menghapus elemen.
-- 
 #### Full code Screenshot:
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-8/blob/main/Modul%208/SS/Unguided1.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-9/blob/main/Modul%209/output/CodeUn1.png" alt="Alt Text">
 </p>
 
 #### Screenshot Output
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-8/blob/main/Modul%208/SS/OutputUnguided.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-9/blob/main/Modul%209/output/OutUn1.png" alt="Alt Text">
 </p>
 
 #### Penjelasan
 
-Dari output di atas, ketika pengguna diminta memasukkan jumlah elemen, dimasukkan jumlah elemen sebanyak 5 dengan elemennya : 1 2 3 4 5. Berikutnya prioritasnya diurutkan. Dimana nilai maksimum (5) akan dikeluarkan. Pengguna memasukkan prioritas baru di indeks ke 2 yaitu 6. Maka perubahan prioritas menjadi 6 3 4 1. Lalu pada indeks ke-1 elemennya di remove. Akhir elemen menjadi 6 1 4.
+Output kode di atas sudah di atur juga dalam fungsi main dimana alurnya sebagai berikut: Pengguna diminta memasukkan bilangan bulat positif --> Jika pengguna memasukkan bilangan negatif maka akan keluar pesan tidak dapat didefinisikan --> Jika bilangan yang dimasukkan benar maka akan di eksekusi kodenya --> Hasil di print sebagai output. Jika memasukkan angka 7 maka faktorialnya adalah 5040.
+
+### 2. Unguided 2
+
+####  Buatlah versi program Rekursif Tidak Langsung (Indirect Recursion) dari soal nomor 1 di atas!
+
+**Kode Program:**
+
+```C++
+#include <iostream>
+
+// Deklarasi kedua fungsi terlebih dahulu
+long long faktorialGenap(int n);
+long long faktorialGanjil(int n);
+
+// Fungsi untuk menghitung faktorial bilangan genap
+long long faktorialGenap(int n) {
+    if (n == 0) 
+        return 1; // basis rekursi
+    else
+        return n * faktorialGanjil(n - 1); // memanggil fungsi faktorialGanjil
+}
+
+// Fungsi untuk menghitung faktorial bilangan ganjil
+long long faktorialGanjil(int n) {
+    if (n == 1) 
+        return 1; // basis rekursi
+    else
+        return n * faktorialGenap(n - 1); // memanggil fungsi faktorialGenap
+}
+
+int main() {
+    int angka;
+    std::cout << "Masukkan bilangan bulat positif: ";
+    std::cin >> angka;
+
+    // Memastikan bahwa angka adalah positif
+    if (angka < 0) {
+        std::cout << "Faktorial tidak didefinisikan untuk bilangan negatif." << std::endl;
+    } else {
+        long long hasil;
+        if (angka % 2 == 0) {
+            hasil = faktorialGenap(angka);
+        } else {
+            hasil = faktorialGanjil(angka);
+        }
+        std::cout << "Hasil Faktorial dari " << angka << " adalah: " << hasil << std::endl;
+    }
+
+    return 0;
+}
+```
+
+**Penjelasan:**
+
+#### Bagian 1
+
+```C++
+#include <iostream>
+```
+
+Library iostream digunakan untuk menjalankan operasi input dan output pada program. Memungkinkan penggunaan fungsi std::cout dan std::cin.
+
+#### Bagian 2
+
+```C++
+long long faktorialGenap(int n);
+long long faktorialGanjil(int n);
+```
+
+Dua fungsi ini dideklarasikan terlebih dahulu sebelum definisinya. Fungsi faktorialGenap digunakan untuk menghitung faktorial bilangan genap, dan faktorialGanjil untuk bilangan ganjil.
+
+#### Bagian 3
+
+```C++
+long long faktorialGenap(int n) {
+    if (n == 0) 
+        return 1; // basis rekursi
+    else
+        return n * faktorialGanjil(n - 1); // memanggil fungsi faktorialGanjil
+}
+```
+
+Fungsi ini menghitung faktorial bilangan genap secara rekursif. Jika n adalah 0, fungsi mengembalikan 1 sebagai basis rekursi. Jika tidak, fungsi mengalikan n dengan hasil dari faktorialGanjil(n - 1), sehingga terjadi pemanggilan rekursif antara fungsi faktorialGenap dan faktorialGanjil.
+
+#### Bagian 4
+
+```C++
+long long faktorialGanjil(int n) {
+    if (n == 1) 
+        return 1; // basis rekursi
+    else
+        return n * faktorialGenap(n - 1); // memanggil fungsi faktorialGenap
+}
+```
+
+Mirip dengan faktorialGenap, fungsi ini menghitung faktorial bilangan ganjil. Jika n adalah 1, fungsi mengembalikan 1 sebagai basis rekursi. Jika tidak, fungsi mengalikan n dengan hasil dari faktorialGenap(n - 1), menciptakan rekursi antara kedua fungsi faktorial.
+
+#### Bagian 5
+
+```C++
+int main() {
+    int angka;
+    std::cout << "Masukkan bilangan bulat positif: ";
+    std::cin >> angka;
+
+    if (angka < 0) {
+        std::cout << "Faktorial tidak didefinisikan untuk bilangan negatif." << std::endl;
+    } else {
+        long long hasil;
+        if (angka % 2 == 0) {
+            hasil = faktorialGenap(angka);
+        } else {
+            hasil = faktorialGanjil(angka);
+        }
+        std::cout << "Hasil Faktorial dari " << angka << " adalah: " << hasil << std::endl;
+    }
+
+    return 0;
+}
+```
+
+Fungsi di atas merupakan fungsi main yang berupa fungsi utama di dalam program yang disebut dengan fungsi main. Fungsi main yang pertama di eksekusi dan memengaruhi tampilan output.
+
+- Program meminta pengguna memasukkan bilangan bulat positif.
+- Jika bilangan negatif, program akan memberikan pesan bahwa faktorial tidak didefinisikan untuk bilangan negatif.
+- Jika positif, program akan menentukan apakah bilangan tersebut genap atau ganjil dan memanggil fungsi faktorial yang sesuai.
+- Hasilnya kemudian dicetak ke konsol.
+
+Secara keseluruhan, program ini memperlihatkan penggunaan rekursi dan pemisahan fungsi berdasarkan kondisi (genap atau ganjil) untuk menghitung faktorial.
+
+#### Full code Screenshot:
+
+<p align="center">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-9/blob/main/Modul%209/output/CodeUn2.png" alt="Alt Text">
+</p>
+
+#### Screenshot Output
+
+<p align="center">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-9/blob/main/Modul%209/output/OutUn2.png" alt="Alt Text">
+</p>
+
+#### Penjelasan
+
+Pada output di atas akan sama dengan seperti faktorial di unguided 1. Tapi yang membedakannya pada kode. Jika pengguna memasukkan nilai negatif maka output yang keluar adalah tidak dapat didefinisikan. Untuk bilangan bulat positif dibagi menjadi dua kode seperti positif genap dan ganjil. Jika memasukkan nilai faktorial 5 maka hasilnya adalah 120.
+
+### 3. Unguided 3
+
+####  Implementasikan hash table untuk menyimpan data mahasiswa. Setiap mahasiswa memiliki NIM dan nilai. Implementasikan fungsi untuk menambahkan data baru, menghapus data, mencari data berdasarkan NIM, dan mencari data berdasarkan nilai.
+
+**Kode Program:**
+
+```C++
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <list>
+#include <algorithm>
+#include <optional>
+
+using namespace std;
+
+struct Mahasiswa {
+    string NIM;
+    int nilai;
+};
+
+class HashTable {
+private:
+    unordered_map<int, list<Mahasiswa>> table;
+    int size; // Adding size to keep track of the number of buckets
+
+    int hashFunction(string NIM) {
+        int sum = 0;
+        for (char ch : NIM) {
+            sum += ch;
+        }
+        return sum % size; // Using size instead of bucket_count
+    }
+
+public:
+    HashTable(int size) : size(size) {
+        table.rehash(size);
+    }
+
+    void tambahData(Mahasiswa mhs) {
+        int index = hashFunction(mhs.NIM);
+        table[index].push_back(mhs);
+    }
+
+    void hapusData(string NIM) {
+        int index = hashFunction(NIM);
+        auto& chain = table[index];
+        chain.remove_if([NIM](const Mahasiswa& mhs) { return mhs.NIM == NIM; });
+    }
+
+    optional<Mahasiswa> cariDataNIM(string NIM) {
+        int index = hashFunction(NIM);
+        for (auto& mhs : table[index]) {
+            if (mhs.NIM == NIM) {
+                return mhs;
+            }
+        }
+        return nullopt;
+    }
+
+    vector<Mahasiswa> cariDataNilai(int minNilai, int maxNilai) {
+        vector<Mahasiswa> hasil;
+        for (auto& chain : table) {
+            for (auto& mhs : chain.second) {
+                if (mhs.nilai >= minNilai && mhs.nilai <= maxNilai) {
+                    hasil.push_back(mhs);
+                }
+            }
+        }
+        return hasil;
+    }
+
+    void tampilkanMenu() {
+        cout << "1. Tambah Data\n";
+        cout << "2. Hapus Data\n";
+        cout << "3. Cari Data Berdasarkan NIM\n";
+        cout << "4. Cari Data Berdasarkan Nilai\n";
+        cout << "5. Keluar\n";
+        cout << "Masukkan pilihan: ";
+    }
+
+    void tampilkanSubMenuNilai() {
+        cout << "Pilih Rentang Nilai:\n";
+        cout << "1. Nilai kurang dari 80\n";
+        cout << "2. Nilai 80-90\n";
+        cout << "3. Nilai 90-100\n";
+        cout << "Masukkan pilihan: ";
+    }
+};
+
+int main() {
+    HashTable ht(10);
+    int pilihan;
+
+    do {
+        ht.tampilkanMenu();
+        cin >> pilihan;
+        switch (pilihan) {
+            case 1: {
+                Mahasiswa mhsBaru;
+                cout << "Masukkan NIM: ";
+                cin >> mhsBaru.NIM;
+                cout << "Masukkan Nilai: ";
+                cin >> mhsBaru.nilai;
+                ht.tambahData(mhsBaru);
+                break;
+            }
+            case 2: {
+                string NIMHapus;
+                cout << "Masukkan NIM yang akan dihapus: ";
+                cin >> NIMHapus;
+                ht.hapusData(NIMHapus);
+                break;
+            }
+            case 3: {
+                string NIMCari;
+                cout << "Masukkan NIM yang dicari: ";
+                cin >> NIMCari;
+                auto found = ht.cariDataNIM(NIMCari);
+                if (found) {
+                    cout << "NIM: " << found->NIM << ", Nilai: " << found->nilai << endl;
+                } else {
+                    cout << "Data tidak ditemukan." << endl;
+                }
+                break;
+            }
+            case 4: {
+                int subPilihan;
+                ht.tampilkanSubMenuNilai();
+                cin >> subPilihan;
+                vector<Mahasiswa> foundNilai;
+
+                switch (subPilihan) {
+                    case 1:
+                        foundNilai = ht.cariDataNilai(0, 79);
+                        break;
+                    case 2:
+                        foundNilai = ht.cariDataNilai(80, 90);
+                        break;
+                    case 3:
+                        foundNilai = ht.cariDataNilai(91, 100);
+                        break;
+                    default:
+                        cout << "Pilihan tidak valid." << endl;
+                        continue; // Go back to the main menu
+                }
+
+                if (!foundNilai.empty()) {
+                    for (auto& mhs : foundNilai) {
+                        cout << "NIM: " << mhs.NIM << ", Nilai: " << mhs.nilai << endl;
+                    }
+                } else {
+                    cout << "Tidak ada nilai pada rentang ini." << endl;
+                }
+                break;
+            }
+            case 5:
+                cout << "Keluar dari program." << endl;
+                break;
+            default:
+                cout << "Pilihan tidak valid." << endl;
+        }
+    } while (pilihan != 5);
+
+    return 0;
+}
+```
+
+**Penjelasan:**
+
+#### Bagian 1
+
+```C++
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <list>
+#include <algorithm>
+#include <optional>
+
+using namespace std;
+```
+
+- #include <iostream> Digunakan untuk operasi input dan output. Dalam kode ini, iostream digunakan untuk mencetak menu ke konsol dan membaca input dari pengguna menggunakan cin dan cout.
+- #include <unordered_map> Digunakan untuk menyimpan data dalam struktur tabel hash. Dalam kode ini, unordered_map digunakan untuk menyimpan dan mengelola data mahasiswa dengan kunci integer yang dihasilkan oleh fungsi hash dan nilai berupa list dari struktur Mahasiswa.
+- #include <vector> Digunakan untuk menyimpan kumpulan data dalam bentuk array dinamis. Dalam kode ini, vector digunakan untuk menyimpan dan mengembalikan daftar mahasiswa yang memenuhi kriteria pencarian tertentu, seperti dalam fungsi cariDataNilai.
+- #include <list> Digunakan untuk menyimpan data dalam struktur data list yang memungkinkan penyisipan dan penghapusan elemen dengan cepat. Dalam kode ini, list digunakan sebagai nilai dalam unordered_map untuk menyimpan mahasiswa yang memiliki nilai hash yang sama (collision handling).
+- #include <algorithm> Digunakan untuk operasi algoritma umum seperti pencarian dan pengurutan. Dalam kode ini, algorithm digunakan untuk fungsi remove_if yang digunakan dalam metode hapusData untuk menghapus mahasiswa dari list berdasarkan NIM.
+- #include <optional> Digunakan untuk mengembalikan nilai yang mungkin tidak ada. Dalam kode ini, optional digunakan untuk fungsi cariDataNIM yang mungkin tidak menemukan mahasiswa dengan NIM yang dicari, sehingga mengembalikan nullopt jika mahasiswa tidak ditemukan.
+- using namespace std; digunakan agar tidak perlu mendeklarasikan std lagi disetiap fungsinya.
+
+#### Bagian 2
+
+```C++
+struct Mahasiswa {
+    string NIM;
+    int nilai;
+};
+```
+
+Struktur Mahasiswa menyimpan data mahasiswa yang terdiri dari NIM (Nomor Induk Mahasiswa) dan nilai.
+
+#### Bagian 3
+
+```C++
+private:
+    unordered_map<int, list<Mahasiswa>> table;
+    int size;
+
+public:
+    HashTable(int size) : size(size) {
+        table.rehash(size);
+    }
+```
+
+- table: unordered_map yang menggunakan int sebagai kunci dan list dari Mahasiswa sebagai nilai.
+- size: Jumlah bucket dalam hash table.
+- Konstruktor: Menginisialisasi ukuran tabel hash dan mengatur ulang jumlah bucket.
+
+#### Bagian 4
+
+```C++
+int hashFunction(string NIM) {
+    int sum = 0;
+    for (char ch : NIM) {
+        sum += ch;
+    }
+    return sum % size;
+}
+```
+
+Menghitung nilai hash dari NIM dengan menjumlahkan nilai ASCII dari setiap karakter, kemudian di modulo dengan size.
+
+#### Bagian 5
+
+```C++
+void tambahData(Mahasiswa mhs);
+void hapusData(string NIM);
+optional<Mahasiswa> cariDataNIM(string NIM);
+vector<Mahasiswa> cariDataNilai(int minNilai, int maxNilai);
+```
+
+- tambahData: Menambahkan data mahasiswa ke dalam tabel.
+- hapusData: Menghapus data mahasiswa berdasarkan NIM.
+- cariDataNIM: Mencari mahasiswa berdasarkan NIM.
+- cariDataNilai: Mencari semua mahasiswa yang nilainya dalam rentang tertentu.
+
+#### Bagian 6
+
+```C++
+int main() {
+    HashTable ht(10);
+    int pilihan;
+
+    do {
+        ht.tampilkanMenu();
+        cin >> pilihan;
+        switch (pilihan) {
+            case 1: {
+                Mahasiswa mhsBaru;
+                cout << "Masukkan NIM: ";
+                cin >> mhsBaru.NIM;
+                cout << "Masukkan Nilai: ";
+                cin >> mhsBaru.nilai;
+                ht.tambahData(mhsBaru);
+                break;
+            }
+            case 2: {
+                string NIMHapus;
+                cout << "Masukkan NIM yang akan dihapus: ";
+                cin >> NIMHapus;
+                ht.hapusData(NIMHapus);
+                break;
+            }
+            case 3: {
+                string NIMCari;
+                cout << "Masukkan NIM yang dicari: ";
+                cin >> NIMCari;
+                auto found = ht.cariDataNIM(NIMCari);
+                if (found) {
+                    cout << "NIM: " << found->NIM << ", Nilai: " << found->nilai << endl;
+                } else {
+                    cout << "Data tidak ditemukan." << endl;
+                }
+                break;
+            }
+            case 4: {
+                int subPilihan;
+                ht.tampilkanSubMenuNilai();
+                cin >> subPilihan;
+                vector<Mahasiswa> foundNilai;
+
+                switch (subPilihan) {
+                    case 1:
+                        foundNilai = ht.cariDataNilai(0, 79);
+                        break;
+                    case 2:
+                        foundNilai = ht.cariDataNilai(80, 90);
+                        break;
+                    case 3:
+                        foundNilai = ht.cariDataNilai(91, 100);
+                        break;
+                    default:
+                        cout << "Pilihan tidak valid." << endl;
+                        continue; // Go back to the main menu
+                }
+
+                if (!foundNilai.empty()) {
+                    for (auto& mhs : foundNilai) {
+                        cout << "NIM: " << mhs.NIM << ", Nilai: " << mhs.nilai << endl;
+                    }
+                } else {
+                    cout << "Tidak ada nilai pada rentang ini." << endl;
+                }
+                break;
+            }
+            case 5:
+                cout << "Keluar dari program." << endl;
+                break;
+            default:
+                cout << "Pilihan tidak valid." << endl;
+        }
+    } while (pilihan != 5);
+
+    return 0;
+}
+```
+
+Fungsi di atas merupakan fungsi main yang berupa fungsi utama di dalam program yang disebut dengan fungsi main. Fungsi main yang pertama di eksekusi dan memengaruhi tampilan output.
+
+- Membuat objek HashTable dengan 10 bucket.
+- Menampilkan menu dan memproses input pengguna untuk melakukan operasi seperti tambah, hapus, dan cari data.
+
+#### Full code Screenshot:
+
+<p align="center">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-9/blob/main/Modul%209/output/CodeUn3.png" alt="Alt Text">
+</p>
+
+#### Screenshot Output
+
+<p align="center">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-9/blob/main/Modul%209/output/OutUn3.1.png" alt="Alt Text">
+</p>
+<p align="center">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-9/blob/main/Modul%209/output/OutUn3.2.png" alt="Alt Text">
+</p>
+
+#### Penjelasan
+
+Output kode di atas sudah di atur juga dalam fungsi main dimana alurnya sebagai berikut: Pengguna akan melihat 5 buah pilihan --> pengguna dapat memilih --> pilihan 1 untuk menambahkan data --> pilihan 2 untuk menghapus data --> pilihan 3 untuk mencari data dari NIM --> pilihan 4 dapat mencari data berdasarkan rentang nilai --> pilihan 5 menu keluar.
 
 ## Kesimpulan
 
-Priority queue merupakan antrian dengan elemen-elemen diurutkan sesuai prioritas berdasarkan nilainya. Elemen nilai tertinggi akan diambil terlebih dahulu dibandingkan nilai yang lebih rendah. Priority queue digunakan dalam sistem real-time dalam algoritma untuk meningkatkan efisiensi. Terdapat beberapa cara implementasi priority queue seperti array, linked list, heap, dan binary search tree.
+Algoritma rekursif dan hash table adalah dua konsep penting dalam ilmu komputer yang digunakan untuk memecahkan masalah dengan cara yang efisien. Algoritma rekursif, yang melibatkan fungsi atau prosedur yang memanggil dirinya sendiri, menawarkan solusi elegan dan sederhana untuk masalah yang dapat dibagi menjadi sub-masalah yang lebih kecil, meskipun memerlukan penanganan yang cermat terhadap overhead dan potensi overflow. Di sisi lain, hash table menyediakan cara yang sangat efisien untuk penyimpanan dan pengambilan data dengan waktu akses rata-rata O(1), dengan berbagai metode penanganan tabrakan seperti open hashing (chaining) dan closed hashing (open addressing). Meskipun masing-masing metode memiliki kelebihan dan kekurangan, pemilihan yang tepat bergantung pada konteks penggunaan dan karakteristik data yang akan diproses.
 
 ## Referensi
-
-[1]	J. A. Aryandi, M. A. Nugraha, Y. A. A. Basith, M. F. Pratama, D. Pradeka, and D. Anggraini, “Implementasi Algoritma Queue untuk Menentukan Prioritas Pelayanan Umum di Rumah Sakit,” JIKO (Jurnal Inform. dan Komputer), vol. 7, no. 2, p. 218, 2023, doi: 10.26798/jiko.v7i2.806.
-
-[2]	L. Kohútka, “Efficiency of Priority Queue Architectures in FPGA †,” J. Low Power Electron. Appl., vol. 12, no. 3, 2022, doi: 10.3390/jlpea12030039.
 
